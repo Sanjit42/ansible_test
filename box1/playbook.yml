@@ -12,3 +12,16 @@
         yum:
           name: /home/vagrant/jdk-8u131-linux-x64.rpm
         become: yes
+
+      - name: Add repository
+        become: yes
+        yum_repository:
+          name: go-server
+          description: Add yum repository
+          baseurl: https://download.gocd.io
+          gpgkey: https://download.gocd.io/GOCD-GPG-KEY.asc
+          gpgcheck: yes
+
+      - name: Install GoCD
+        become: yes
+        yum: name=go-server-17.1.0
